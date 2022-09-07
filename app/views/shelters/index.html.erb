@@ -1,5 +1,5 @@
 <h1>All Shelters</h1>
-
+<div style='margin-left:20px'>
 <%= link_to "Sort by number of pets", "/shelters?sort=pet_count" %>
 
 <%= form_with url: "/shelters", method: :get, local: true do |f| %>
@@ -9,3 +9,4 @@
 <% end %>
 
 <%= render partial: 'index_list'%>
+
