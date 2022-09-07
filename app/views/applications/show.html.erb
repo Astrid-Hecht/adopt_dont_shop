@@ -27,8 +27,15 @@
         <%= form.text_area :about, placeholder: 'Tell us about yourself and your home..', required: true, class: 'form-control'%> <br>
         <%= form.submit "Submit Application" %>
         <% end %>
+        <body>
+        <% flash.each do |type, message| %>
+              <p><%= message %></p>
+            <% end %>
+
+        <%= yield %>
+        </body>
       </section>
-    <%end%> 
+    <%end%>
     <br>
     <br>
 
