@@ -17,7 +17,7 @@ class Shelter < ApplicationRecord
   end
 
   def self.order_by_reverse_alpha
-    find_by_sql("SELECT name FROM shelters ORDER BY name DESC")
+    find_by_sql("SELECT * FROM shelters ORDER BY name DESC")
   end
 
   def self.pending_apps
