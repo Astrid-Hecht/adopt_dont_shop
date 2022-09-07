@@ -35,12 +35,8 @@ class ApplicationsController < ApplicationController
     end
     application.update(application_params)
 
-    if application.save
-      redirect_to "/applications/#{application.id}"
-    else
-    flash[:notice] = 'Fill out the About section'
-    render :new
-    end
+  
+    redirect_to "/applications/#{application.id}"
   end
 
   private
