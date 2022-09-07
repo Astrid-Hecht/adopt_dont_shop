@@ -140,4 +140,20 @@ RSpec.describe 'the app show' do
     expect(page).to_not have_content('Add a Pet to this Application')
     expect(page).to_not have_field('Search by Name')
   end
+
+  it 'wont let you submit an application unless you fill in the about form' do
+    @app_no_about = Application.create!(name: "Noabout McGoo", address: "Nowhere", city: "Omaha", state: "NE", zipcode: "55555")
+    visit "/applications/#{@app_no_about.id}"
+    within '#add_pet' do
+      expect(page).to have_content('Add a Pet to this Application')
+      expect(find('form')).to have_content('Search by Name')
+
+      fill_in 'Search by Name', with: 'Bare-y'
+      click_button 'Search'
+      click_button 'Adopt this pet'
+    end
+    click_button 'Submit Application'
+    expect(page).to have_content('Fill out the About section')
+  
+  end
 end

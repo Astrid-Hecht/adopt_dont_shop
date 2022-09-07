@@ -47,6 +47,57 @@ RSpec.describe 'application creation' do
       end
     end
 
+    context 'the saddest path' do
+      it 'wont accept spaces as input' do
+        visit '/applications/new'
+
+        fill_in 'Name', with: ' '
+        fill_in 'Address', with: ' '
+        fill_in 'City', with: ' '
+        fill_in 'State', with: ' '
+        fill_in 'Zipcode', with: ' '
+        click_button 'Submit'
+        expect(page).to have_content('Please fill out the whole form')
+      end
+
+      it 'wont accept it with any combination of bad data 1' do
+        visit '/applications/new'
+
+        fill_in 'Name', with: ' '
+        fill_in 'Address', with: 'placeholder'
+        fill_in 'City', with: 'placeholder'
+        fill_in 'State', with: 'placeholder'
+        fill_in 'Zipcode', with: 'placeholder'
+        click_button 'Submit'
+        expect(page).to have_content('Please fill out the whole form')
+      end
+
+      it 'wont accept it with any combination of bad data 2' do
+        visit '/applications/new'
+
+        fill_in 'Name', with: "placeholder"
+        fill_in 'Address', with: '  '
+        fill_in 'City', with: 'placeholder'
+        fill_in 'State', with: 'placeholder'
+        fill_in 'Zipcode', with: 'placeholder'
+        click_button 'Submit'
+        expect(page).to have_content('Please fill out the whole form')
+      end
+
+      it 'wont accept it with any combination of bad data 3' do
+        visit '/applications/new'
+
+        fill_in 'Name', with: "placeholder"
+        fill_in 'Address', with: 'placeholder'
+        fill_in 'City', with: ' '
+        fill_in 'State', with: 'placeholder'
+        fill_in 'Zipcode', with: 'placeholder'
+        click_button 'Submit'
+        expect(page).to have_content('Please fill out the whole form')
+      end
+    end
+
+
   end
 
 end
